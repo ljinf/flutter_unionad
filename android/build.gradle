@@ -4,25 +4,48 @@ version '1.0-SNAPSHOT'
 buildscript {
     ext.kotlin_version = '1.6.10'
     repositories {
+        //mintegral sdk依赖   引入mintegral sdk需要添加此maven
+        maven {
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_support/"
+        }
         google()
         jcenter()
     }
-
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
+allprojects {
+    repositories {
+        //mintegral sdk依赖   引入mintegral sdk需要添加此maven
+        maven {
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_support/"
+        }
+
+        maven {
+            url "https://artifact.bytedance.com/repository/pangle"
+        }
+        google()
+        jcenter()
+    }
+}
+
 rootProject.allprojects {
     repositories {
+        //mintegral sdk依赖   引入mintegral sdk需要添加此maven
+        maven {
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_support/"
+        }
+        maven {
+            url 'https://artifact.bytedance.com/repository/pangle'
+        }
+
         google()
         jcenter()
         flatDir {
             dirs project(':flutter_unionad').file('libs')
-        }
-        maven {
-            url 'https://artifact.bytedance.com/repository/pangle'
         }
     }
 }
@@ -72,9 +95,15 @@ dependencies {
 //    implementation(name: 'open_ad_sdk_6.5.0.2', ext: 'aar')
 //    implementation(name: 'tools_release', ext: 'aar')
 
+    //ks
+    implementation(name: "kssdk-ad-3.3.69", ext: 'aar')
+    //gdt
+    implementation(name: "GDTSDK.unionNormal.4.610.1480", ext: 'aar')
+
     implementation "com.pangle.cn:mediation-sdk:6.6.0.7"  //融合SDK
-//    implementation "com.pangle.cn:mediation-ks-adapter:3.3.67.0"//ks adapter
-//    implementation "com.pangle.cn:mediation-gdt-adapter:4.591.1461.1" //gdt adapter
+    implementation "com.pangle.cn:mediation-ks-adapter:3.3.69.3"//ks adapter
+    implementation "com.pangle.cn:mediation-gdt-adapter:4.610.1480.0" //gdt adapter
+
 //    implementation "com.pangle.cn:mediation-admob-adapter:17.2.0.62"//admob adapter
 //    implementation "com.pangle.cn:mediation-baidu-adapter:9.36.2"//baidu adapter
 //    implementation "com.pangle.cn:mediation-klevin-adapter:2.11.0.3.23"//游可赢 adapter
